@@ -38,9 +38,8 @@ func (p *GameProgress) RoundInit() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(p.input)
 	p.input = strings.TrimSuffix(input, "\r")
-	p.input = strings.TrimSuffix(input, "\n")
+	p.input = strings.TrimSuffix(p.input, "\n")
 	p.input = strings.ToLower(p.input)
 	p.input = strings.ReplaceAll(p.input, " ", "")
 	p.CheckAnswer()
