@@ -84,7 +84,6 @@ func (p *GameProgress) BuzzRound() {
 }
 
 func (p *GameProgress) DefaultRound() {
-	fmt.Printf("%v %T %q %s", p.input, p.input, p.input, p.input)
 	if strings.Compare(p.input, strconv.Itoa(p.round)) == 0 {
 		p.RoundSuccess()
 	}
