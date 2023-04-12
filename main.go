@@ -21,17 +21,17 @@ type Game interface {
 	DefaultRound()
 }
 
-type Player struct {
+type GameProgress struct {
 	round int
 	input string
 }
 
-func (p *Player) InitGame() {
+func (p *GameProgress) InitGame() {
 	fmt.Println("Game Started!")
 	p.RoundInit()
 }
 
-func (p *Player) RoundInit() {
+func (p *GameProgress) RoundInit() {
 	fmt.Printf("Round %d and your answer is -> ", p.round)
 	reader := bufio.NewReader(os.Stdin)
 	input, err := reader.ReadString('\n')
@@ -44,7 +44,7 @@ func (p *Player) RoundInit() {
 	p.CheckAnswer()
 }
 
-func (p *Player) CheckAnswer() {
+func (p *GameProgress) CheckAnswer() {
 	switch {
 	case (p.round%3 == 0) && (p.round%5 == 0):
 		p.FizzBuzzRound()
@@ -57,7 +57,7 @@ func (p *Player) CheckAnswer() {
 	}
 }
 
-func (p *Player) FizzBuzzRound() {
+func (p *GameProgress) FizzBuzzRound() {
 	fmt.Println("fizzbuzz round")
 	if p.input == "fizzbuzz" {
 		p.RoundSuccess()
@@ -65,7 +65,7 @@ func (p *Player) FizzBuzzRound() {
 	p.RoundFailed()
 }
 
-func (p *Player) FizzRound() {
+func (p *GameProgress) FizzRound() {
 	fmt.Println("fizz round")
 	if p.input == "fizz" {
 		p.RoundSuccess()
@@ -73,7 +73,7 @@ func (p *Player) FizzRound() {
 	p.RoundFailed()
 }
 
-func (p *Player) BuzzRound() {
+func (p *GameProgress) BuzzRound() {
 	fmt.Println("buzz round")
 	if p.input == "buzz" {
 		p.RoundSuccess()
@@ -81,26 +81,26 @@ func (p *Player) BuzzRound() {
 	p.RoundFailed()
 }
 
-func (p *Player) DefaultRound() {
+func (p *GameProgress) DefaultRound() {
 	if strings.Compare(p.input, strconv.Itoa(p.round)) == 0 {
 		p.RoundSuccess()
 	}
 	p.RoundFailed()
 }
 
-func (p *Player) RoundSuccess() {
+func (p *GameProgress) RoundSuccess() {
 	fmt.Println("Correct!")
 	p.round += 1
 	p.RoundInit()
 }
 
-func (p *Player) RoundFailed() {
+func (p *GameProgress) RoundFailed() {
 	fmt.Printf("You lose!")
 	os.Exit(200)
 }
 
 func main() {
-	var pl Game = &Player{round: 1}
+	var pl Game = &GameProgress{round: 1}
 	for {
 		pl.InitGame()
 	}
