@@ -38,8 +38,9 @@ func (p *GameProgress) RoundInit() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	p.input = strings.TrimSuffix(input, "\r")
-	p.input = strings.TrimSuffix(p.input, "\n")
+
+	p.input = strings.TrimSuffix(input, "\n")
+	p.input = strings.TrimSuffix(p.input, "\r")
 	p.input = strings.ToLower(p.input)
 	p.input = strings.ReplaceAll(p.input, " ", "")
 	p.CheckAnswer()
@@ -83,6 +84,7 @@ func (p *GameProgress) BuzzRound() {
 }
 
 func (p *GameProgress) DefaultRound() {
+	fmt.Printf("%v %T %q %s", p.input, p.input, p.input, p.input)
 	if strings.Compare(p.input, strconv.Itoa(p.round)) == 0 {
 		p.RoundSuccess()
 	}
